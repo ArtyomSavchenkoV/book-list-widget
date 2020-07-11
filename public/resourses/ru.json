@@ -1,4 +1,8 @@
 {
+    "warnings": {
+        "fetch_dictionary_failure": "Неудача при получении файла локализации текста.",
+        "fetch_books_failure": "Неудача при получении списка книг."
+    },
     "app": {
         "title": "Книжки!"
     }

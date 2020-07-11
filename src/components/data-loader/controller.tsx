@@ -43,10 +43,19 @@ const Controller: React.FC<TProps & TWithApiService & TWithLocalization & IConne
         default: { }
     };
 
+    let warningText = '';
+    if (dictionaryStatus === 'FAILURE') {
+        warningText += localize('warnings.fetch_dictionary_failure') + ' ';
+    }
+    if (booksStore.dataStatus === 'FAILURE') {
+        warningText += localize('warnings.fetch_books_failure') + ' ';
+    }
+
     return (
         <Layout
             dictionaryStatus={dictionaryStatus}
             labelText={localize('data-loader.label')}
+            warningText={warningText}
         />
     )
 }

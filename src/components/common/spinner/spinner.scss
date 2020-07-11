@@ -1,0 +1,19 @@
+.resizable-spinner {
+    overflow: hidden;
+
+    .ring {
+        border: 2px solid;
+        border-top-color: transparent;
+        border-radius: 50%;
+        animation: animate-resizable-spinner-ring 1.5s linear infinite;
+    }
+
+    @keyframes animate-resizable-spinner-ring {
+        0% {
+            transform: rotate(0);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}
