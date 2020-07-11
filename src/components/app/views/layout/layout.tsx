@@ -3,15 +3,18 @@ import React from 'react';
 import './layout.scss';
 
 type props = {
-    title: string
+    title: string,
+    children: JSX.Element | null
 }
 const Layout :React.FC<props> = ({
-    title
+    title,
+    children
 }) => {
 
     return (
         <div className="app">
             {title}
+            {children}
         </div>
     );
 };

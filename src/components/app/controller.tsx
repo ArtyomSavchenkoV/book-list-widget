@@ -14,17 +14,29 @@ import DataLoader from '../data-loader';
 type TApp = {
 };
 const App: React.FC<TApp & IConnect<typeof storeEnhancer> & TWithLocalization> = ({
+    applicationStateStore,
+    booksStore,
     localize
 }) => {
+
+    const content = booksStore.dataStatus !== 'READY' ? (
+        <DataLoader />
+    ) : (
+        null
+    );
+    
     return (
         <Layout title={localize('app.title')}>
+            {content}
         </Layout>
     );
 };
 
 
-const mapStoreToProps = ({ }: TStore) => {
+const mapStoreToProps = ({ applicationStateStore, booksStore }: TStore) => {
     return {
+        applicationStateStore,
+        booksStore
     };
 };
 
