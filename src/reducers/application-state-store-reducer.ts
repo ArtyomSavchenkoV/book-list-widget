@@ -3,7 +3,7 @@ import { TAction } from './index';
 /*
 *   Commands types
 */
-export type TApplicationStateAction = {
+export type TApplicationStateStoreReducerCommands = {
     type: 'FETCH_DICTIONARY_REQUESTED'
 }  | {
     type: 'FETCH_DICTIONARY_SUCCESS',
@@ -35,10 +35,10 @@ const initialApplicationStateStore: TApplicationStateStore = {
 /*
 *   The Reducer
 */
-interface IApplicationStateReducer {
+interface IApplicationStateStoreReducer {
     (arg0: TApplicationStateStore | undefined, arg1: TAction): TApplicationStateStore;
 };
-const applicationStateReducer: IApplicationStateReducer = (applicationStateStore = initialApplicationStateStore, action) => {
+const applicationStateStoreReducer: IApplicationStateStoreReducer = (applicationStateStore = initialApplicationStateStore, action) => {
     switch (action.type) {
         case 'FETCH_DICTIONARY_REQUESTED': {
             return {
@@ -81,4 +81,4 @@ const applicationStateReducer: IApplicationStateReducer = (applicationStateStore
 };
 
 
-export default applicationStateReducer;
+export default applicationStateStoreReducer;
