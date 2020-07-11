@@ -14,13 +14,9 @@ class ApiService implements IApiService {
     }
 
     getRequester = async (address: string) => {
-        const result = await fetch(address, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json; charset=utf-8' }
-        }
-        );
+        const result = await fetch(address);
 
-        if (!result.ok) {
+        if (!result.ok) {            
             throw new Error(`Could not fetch ${address}, received ${result.status}.`);
         }
 

@@ -38,9 +38,7 @@ interface IFetchDictionaryRequest {
 }
 const fetchDictionaryRequest: IFetchDictionaryRequest = (ApiService) => (dispatch) => {
     dispatch(fetchDictionaryRequested());
-    ApiService.getDictionaryRequest().then((request)=>{
-        console.log(request);
-        
+    ApiService.getDictionaryRequest().then((request)=>{        
         dispatch(fetchDictionarySuccess(request));
     })
     .catch(()=>{

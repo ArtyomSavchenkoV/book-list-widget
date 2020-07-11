@@ -50,7 +50,6 @@ interface IFetchBooksRequest {
 const fetchBooksRequest: IFetchBooksRequest = (ApiService) => (dispatch) => {
     dispatch(fetchBooksRequested());
     ApiService.getBooksRequest().then((request) => {
-        console.log(request);
         dispatch(fetchBooksSuccess(request));
     })
         .catch(() => {

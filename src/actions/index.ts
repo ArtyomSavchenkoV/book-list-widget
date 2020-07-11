@@ -1,7 +1,16 @@
 import {
     fetchDictionaryRequest
 } from './application-state-actions';
+import {
+    fetchBooksRequest,
+    changeBookStatus,
+    switchFilterTag
+} from './books-actions';
 
 export {
-    fetchDictionaryRequest
+    fetchDictionaryRequest,
+
+    fetchBooksRequest,
+    changeBookStatus,
+    switchFilterTag
 }
