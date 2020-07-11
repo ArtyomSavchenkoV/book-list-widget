@@ -10,6 +10,8 @@ import { TStore, IConnect } from '../../reducers';
 import { fetchBooksRequest } from '../../actions';
 
 import Layout from './views/layout';
+import NoticePanel from './views/notice-panel';
+import Spinner from '../common/spinner';
 
 
 type TProps = {
@@ -23,9 +25,16 @@ const Controller: React.FC<TProps & TWithApiService & TWithLocalization & IConne
     localize
 }) => {
 
+    let content: JSX.Element = <NoticePanel><Spinner /></NoticePanel>;
     switch (booksStatus) {
         case 'EMPTY': {
             fetchBooksRequest(ApiService);
+            break;
+        }
+        case 'READY': {
+            if (booksList.length === 0) {
+            content = <NoticePanel>{localize('book-list.list_is_empty')}</NoticePanel>
+            }
             break;
         }
         default: {}
@@ -33,7 +42,9 @@ const Controller: React.FC<TProps & TWithApiService & TWithLocalization & IConne
     console.log(booksList);    
 
     return (
-        <Layout />
+        <Layout>
+            {content}
+        </Layout>
     )
 }
 

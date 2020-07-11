@@ -4,13 +4,15 @@ import './layout.scss';
 
 
 type TProps = {
-
+    children: JSX.Element
 }
-const Layout: React.FC<TProps> = () => {
+const Layout: React.FC<TProps> = ({
+    children
+}) => {
 
     return (
         <div className="books-list">
-            ##books list
+            {children}
         </div>
     )
 }
