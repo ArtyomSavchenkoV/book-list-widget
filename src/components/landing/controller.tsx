@@ -13,7 +13,7 @@ const Controller: React.FC<TProps> = () => {
     return (
         <Layout
             header={<PageSelector />}
-            body={<BooksList/>}
+            body={<BooksList />}
         />
     )
 }
