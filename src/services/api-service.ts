@@ -7,10 +7,10 @@ export interface IApiService {
 };
 
 class ApiService implements IApiService {
-    _configs: { booksSource: string } = { booksSource: '' }
+    _configs: { books_source: string, localizaton_source: string } = { books_source: '', localizaton_source: '' }
 
     constructor() {
-        this._configs = configs as { booksSource: string }
+        this._configs = configs as { books_source: string, localizaton_source: '' }
     }
 
     getRequester = async (address: string) => {
@@ -29,12 +29,12 @@ class ApiService implements IApiService {
     *   Requests
     */
     getDictionaryRequest: () => Promise<{}> = async () => {
-        const response = await this.getRequester('http://localhost:3000/resourses/ru.json');
+        const response = await this.getRequester(this._configs.localizaton_source);
         return response;
     }
 
     getBooksRequest: () => Promise<TGetBookResponse> = async () => {
-        const response = await this.getRequester(this._configs.booksSource);
+        const response = await this.getRequester(this._configs.books_source);
         return this._transformErrorCatcher<TGetBookResponse, any>(transformGetBookResponse, response, 'logoutRequest');
     }
 

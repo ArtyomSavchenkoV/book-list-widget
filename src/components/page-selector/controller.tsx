@@ -24,6 +24,7 @@ const Controller: React.FC<TProps & TWithLocalization & IConnect<typeof storeEnc
 
     localize
 }) => {
+    
     return (
         <Layout
             onSelectPage={setPage}
