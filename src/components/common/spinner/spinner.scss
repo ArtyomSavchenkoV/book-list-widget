@@ -3,6 +3,7 @@
 
     .ring {
         border: 2px solid;
+        border-color: inherit;
         border-top-color: transparent;
         border-radius: 50%;
         animation: animate-resizable-spinner-ring 1.5s linear infinite;
