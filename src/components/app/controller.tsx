@@ -9,7 +9,7 @@ import withErrorBoundary from '../hoc/with-error-boundary';
 import { IConnect, TStore } from '../../reducers';
 
 import Layout from './views/layout';
-import DataLoader from '../data-loader';
+import LocalizationLoader from '../localization-loader';
 import Landing from '../landing';
 
 type TApp = {
@@ -21,7 +21,7 @@ const App: React.FC<TApp & IConnect<typeof storeEnhancer> & TWithLocalization> =
 }) => {
 
     const content = booksStore.dataStatus !== 'READY' ? (
-        <DataLoader />
+        <LocalizationLoader />
     ) : (
         <Landing />
     );
