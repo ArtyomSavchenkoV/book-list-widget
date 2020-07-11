@@ -1,9 +1,17 @@
+import { TGetBookResponse, transformGetBookResponse } from './api-adapters/get-books';
+import configs from '../configs/configs.json';
+
 export interface IApiService {
     getDictionaryRequest: () => Promise<{}>
+    getBooksRequest: () => Promise<TGetBookResponse>
 };
 
-
 class ApiService implements IApiService {
+    _configs: { booksSource: string } = { booksSource: '' }
+
+    constructor() {
+        this._configs = configs as { booksSource: string }
+    }
 
     getRequester = async (address: string) => {
         const result = await fetch(address, {
@@ -17,9 +25,9 @@ class ApiService implements IApiService {
         }
 
         return await result.json();
-    }; 
+    };
 
-    
+
     /*
     *   Requests
     */
@@ -28,26 +36,22 @@ class ApiService implements IApiService {
         return response;
     }
 
+    getBooksRequest: () => Promise<TGetBookResponse> = async () => {
+        const response = await this.getRequester(this._configs.booksSource);
+        return this._transformErrorCatcher<TGetBookResponse, any>(transformGetBookResponse, response, 'logoutRequest');
+    }
 
     _transformErrorCatcher: ITransformErrorCatcher = (transformer, data, unitName = '') => {
         try {
             return transformer(data);
         } catch (e) {
             console.error('API service transform ERROR:', unitName, e);
-            const result: { status: false, payload: { code: string, message: string, details: any } } = {
-                status: false,
-                payload: {
-                    code: '-1',
-                    message: 'api_response_transform_error',
-                    details: e
-                }
-            };
-            return result
+            throw new Error('API service transform ERROR');
         }
     }
 }
 interface ITransformErrorCatcher {
-    <T, N>(arg0: (arg0: N) => T, arg1: N, arg2?: string): T | { status: false, payload: { code: string, message: string, details: any } }
+    <T, N>(arg0: (arg0: N) => T, arg1: N, arg2?: string): T
 }
 
 export default ApiService;
