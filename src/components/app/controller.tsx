@@ -9,6 +9,7 @@ import withErrorBoundary from '../hoc/with-error-boundary';
 import { IConnect, TStore } from '../../reducers';
 
 import Layout from './views/layout';
+import DataLoader from '../data-loader';
 
 type TApp = {
 };
