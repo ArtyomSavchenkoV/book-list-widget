@@ -1,5 +1,6 @@
 import {
-    fetchDictionaryRequest
+    fetchDictionaryRequest,
+    setPage
 } from './application-state-actions';
 import {
     fetchBooksRequest,
@@ -9,6 +10,7 @@ import {
 
 export {
     fetchDictionaryRequest,
+    setPage,
 
     fetchBooksRequest,
     changeBookStatus,

@@ -31,10 +31,7 @@ export type TStore = {
 /*
 *   Initial store
 */
-const initStore = {
-    applicationState: undefined,
-    booksStore: undefined
-};
+const initStore = {};
 
 /*
 *   The Reducer

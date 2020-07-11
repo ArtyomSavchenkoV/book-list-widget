@@ -1,3 +1,19 @@
 .page-selector {
-    
+    display: flex;
+
+    button {
+        width: 100%;
+        background-color: #fff;
+        cursor: pointer;
+        padding: 20px 10px;
+        border: #999 1px solid;
+        border-top: none;
+        border-left: none;
+    }
+    button:last-child {
+        border-right: none;
+    }
+    button.selected {
+        border-bottom-color: transparent;
+    }
 }

@@ -108,10 +108,10 @@ const booksStoreReducer: IBooksStoreReducer = (booksStore = initialBooksStore, a
                     ...booksStore[action.payload.currentStatus].slice(0, bookIndex),
                     ...booksStore[action.payload.currentStatus].slice(bookIndex + 1)
                 ],
-                [action.payload.newStatus]: {
+                [action.payload.newStatus]: [
                     ...booksStore[action.payload.newStatus],
                     book
-                }
+                ]
             }
         }
 

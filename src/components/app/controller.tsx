@@ -15,12 +15,10 @@ import Landing from '../landing';
 type TApp = {
 };
 const App: React.FC<TApp & IConnect<typeof storeEnhancer> & TWithLocalization> = ({
-    applicationStateStore,
-    booksStore,
+    dictionaryStatus,
     localize
 }) => {
-
-    const content = booksStore.dataStatus !== 'READY' ? (
+    const content = (dictionaryStatus !== 'READY' && dictionaryStatus !== 'FAILURE') ? (
         <LocalizationLoader />
     ) : (
         <Landing />
@@ -34,10 +32,9 @@ const App: React.FC<TApp & IConnect<typeof storeEnhancer> & TWithLocalization> =
 };
 
 
-const mapStoreToProps = ({ applicationStateStore, booksStore }: TStore) => {
+const mapStoreToProps = ({ applicationStateStore }: TStore) => {
     return {
-        applicationStateStore,
-        booksStore
+        dictionaryStatus: applicationStateStore.localization.dictionaryStatus
     };
 };
 

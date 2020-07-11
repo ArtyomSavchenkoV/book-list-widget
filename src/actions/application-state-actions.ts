@@ -48,12 +48,12 @@ const fetchDictionaryRequest: IFetchDictionaryRequest = (ApiService) => (dispatc
 }
 
 
-interface ISetCurrentPage {
+interface ISetPage {
     (newPage: 'TO_READ' | 'IN_PROGRESS' | 'DONE'): TAction
 }
-const setCurrentPage: ISetCurrentPage = (newPage) => {
+const setPage: ISetPage = (newPage) => {
     return {
-        type: 'SET_CURRENT_PAGE',
+        type: 'SET_PAGE',
         payload: newPage
     }
 }
@@ -61,5 +61,5 @@ const setCurrentPage: ISetCurrentPage = (newPage) => {
 
 export {
     fetchDictionaryRequest,
-    setCurrentPage
+    setPage
 }

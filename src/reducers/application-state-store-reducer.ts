@@ -11,7 +11,7 @@ export type TApplicationStateStoreReducerCommands = {
 } | {
     type: 'FETCH_DICTIONARY_FAILURE'
 } | {
-    type: 'SET_CURRENT_PAGE',
+    type: 'SET_PAGE',
     payload: 'TO_READ' | 'IN_PROGRESS' | 'DONE'
 };
 
@@ -79,7 +79,7 @@ const applicationStateStoreReducer: IApplicationStateStoreReducer = (application
         }
 
 
-        case 'SET_CURRENT_PAGE': {
+        case 'SET_PAGE': {
             return {
                 ...applicationStateStore,
                 currentPage: action.payload
