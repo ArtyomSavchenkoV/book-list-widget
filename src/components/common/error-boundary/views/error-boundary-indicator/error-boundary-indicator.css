@@ -1,0 +1,11 @@
+.error-boundary-indicator {
+    border: solid 2px #cc4545;
+    background-color: #f58383;
+    width: 100%;
+    min-width: 100px;
+    text-align: center;
+}
+
+.error-boundary-indicator h3 {
+    color: #b92c2c;
+}
