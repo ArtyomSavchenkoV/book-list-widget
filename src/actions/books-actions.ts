@@ -13,34 +13,23 @@ const fetchBooksRequested: TFetchBooksRequested = () => {
 
 
 type TFetchBooksSuccess = {
-    (books:{
-        booksToRead: {
-            id: string,
-            author: string,
-            title: string,
-            description: string,
-            tags: string[]
-        }[],
-        booksInProgress: {
-            id: string,
-            author: string,
-            title: string,
-            description: string,
-            tags: string[]
-        }[],
-        booksDone: {
-            id: string,
-            author: string,
-            title: string,
-            description: string,
-            tags: string[]
-        }[]
-    } ): TAction
+    (books: {
+        id: string,
+        author: string,
+        title: string,
+        description: string,
+        tags: string[]
+    }[]): TAction
 }
 const fetchBooksSuccess: TFetchBooksSuccess = (books) => {
+    // TODO: create books arrays by saved status 
     return {
         type: 'FETCH_BOOKS_SUCCESS',
-        payload: books
+        payload: {
+            booksToRead: books,
+            booksInProgress: [],
+            booksDone: []
+        }
     }
 }
 
@@ -60,15 +49,13 @@ interface IFetchBooksRequest {
 }
 const fetchBooksRequest: IFetchBooksRequest = (ApiService) => (dispatch) => {
     dispatch(fetchBooksRequested());
-    // TODO: make api service requesting method.
-    /*ApiService.getDictionaryRequest().then((request)=>{
+    ApiService.getBooksRequest().then((request) => {
         console.log(request);
-        
         dispatch(fetchBooksSuccess(request));
     })
-    .catch(()=>{
-        dispatch(fetchBooksFailure());
-    })*/
+        .catch(() => {
+            dispatch(fetchBooksFailure());
+        })
 }
 
 
