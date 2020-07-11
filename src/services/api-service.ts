@@ -16,7 +16,8 @@ class ApiService implements IApiService {
     getRequester = async (address: string) => {
         const result = await fetch(address);
 
-        if (!result.ok) {            
+        if (!result.ok) {        
+            console.error(`Could not fetch ${address}, received ${result.status}.`);    
             throw new Error(`Could not fetch ${address}, received ${result.status}.`);
         }
 
