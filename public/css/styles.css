@@ -1,4 +1,11 @@
+@font-face {
+    font-family: Roboto;
+    src: url("../fonts/Roboto.ttf");
+}
+
+
 * {
+    font-family: Roboto;
     border-color: #999;
     color: #000;
 }
