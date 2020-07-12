@@ -4,7 +4,7 @@ import './layout.scss';
 
 
 type TProps = {
-    children: JSX.Element
+    children: JSX.Element | JSX.Element[]
 }
 const Layout: React.FC<TProps> = ({
     children

@@ -11,6 +11,7 @@ import { fetchBooksRequest } from '../../actions';
 
 import Layout from './views/layout';
 import NoticePanel from './views/notice-panel';
+import Book from './views/book';
 import Spinner from '../common/spinner';
 
 
@@ -25,7 +26,7 @@ const Controller: React.FC<TProps & TWithApiService & TWithLocalization & IConne
     localize
 }) => {
 
-    let content: JSX.Element = <NoticePanel><Spinner /></NoticePanel>;
+    let content: JSX.Element | JSX.Element[] = <NoticePanel><Spinner /></NoticePanel>;
     switch (booksStatus) {
         case 'EMPTY': {
             fetchBooksRequest(ApiService);
@@ -33,13 +34,17 @@ const Controller: React.FC<TProps & TWithApiService & TWithLocalization & IConne
         }
         case 'READY': {
             if (booksList.length === 0) {
-            content = <NoticePanel>{localize('book-list.list_is_empty')}</NoticePanel>
+                content = <NoticePanel>{localize('book-list.list_is_empty')}</NoticePanel>
+            } else {
+                content = booksList.map((el) => {
+                    return <Book key={el.id} />
+                })
             }
             break;
         }
-        default: {}
+        default: { }
     }
-    console.log(booksList);    
+    console.log(booksList);
 
     return (
         <Layout>
