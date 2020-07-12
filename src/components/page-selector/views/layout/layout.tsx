@@ -20,24 +20,24 @@ const Layout: React.FC<TProps> = ({
 
     return (
         <div className="page-selector">
-            <button
+            <div
                 onClick={() => onSelectPage('TO_READ')}
-                className={'' + (currentPage === 'TO_READ' ? ' selected' : '')}
+                className={'tab' + (currentPage === 'TO_READ' ? ' selected' : '')}
             >
                 {toReadText}
-            </button>
-            <button
+            </div>
+            <div
                 onClick={() => onSelectPage('IN_PROGRESS')}
-                className={'' + (currentPage === 'IN_PROGRESS' ? ' selected' : '')}
+                className={'tab' + (currentPage === 'IN_PROGRESS' ? ' selected' : '')}
             >
                 {inProgressText}
-            </button>
-            <button
+            </div>
+            <div
                 onClick={() => onSelectPage('DONE')}
-                className={'' + (currentPage === 'DONE' ? ' selected' : '')}
+                className={'tab' + (currentPage === 'DONE' ? ' selected' : '')}
             >
                 {doneText}
-            </button>
+            </div>
         </div>
     )
 }
