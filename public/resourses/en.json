@@ -7,5 +7,8 @@
         "to_read": "To read (<{count}>)",
         "in_progress": "In progress (<{count}>)",
         "done": "Done (<{count}>)"
+    },
+    "book-list": {
+        "list_is_empty": "List is empty"
     }
 }
