@@ -28,7 +28,7 @@ const App: React.FC<TApp & IConnect<typeof storeEnhancer> & TWithLocalization> =
 
     return (
         <>
-            <Layout title={localize('app.title')}>
+            <Layout>
                 {content}
             </Layout>
             <StoreFromUrlUpdater />
