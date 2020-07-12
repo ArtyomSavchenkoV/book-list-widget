@@ -1,3 +1,38 @@
 .books-list .book {
-    
+    border-top: 1px solid;
+    border-color: inherit;
+    padding: 15px;
+
+    >.header {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-bottom: 15px;
+
+        >.book-requisites {
+
+            >.author {
+
+            }
+            >.title {
+                font-size: 1.5em;
+                font-weight: 600;
+            }
+        }
+        >.action {
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+        }
+    }
+    >.content {
+        margin-bottom: 15px;
+    }
+    >.tags {
+        
+    }
+}
+
+.books-list .book:first-child {
+    border-top: none;
 }
