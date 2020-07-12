@@ -54,7 +54,7 @@ const Controller: React.FC<TProps & TWithLocalization & IConnect<typeof storeEnc
 const mapDispatchToProps = {
     changeBookStatus
 }
-const storeEnchancer = connect(()=>{}, mapDispatchToProps);
+const storeEnchancer = connect(()=>{return{}}, mapDispatchToProps);
 
 export default compose(
     withErrorBoundary,

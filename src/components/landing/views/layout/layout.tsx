@@ -5,11 +5,11 @@ import './layout.scss';
 
 type TProps = {
     header: JSX.Element,
-    body: JSX.Element
+    children: JSX.Element | JSX.Element[]
 }
 const Layout: React.FC<TProps> = ({
     header,
-    body
+    children
 }) => {
 
     return (
@@ -18,7 +18,7 @@ const Layout: React.FC<TProps> = ({
                 {header}
             </div>
             <div className="landing-body">
-                {body}
+                {children}
             </div>
         </div>
     )

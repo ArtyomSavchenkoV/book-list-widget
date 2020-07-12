@@ -15,5 +15,9 @@
         "start_reading": "Start reading",
         "finish_reading": "Finish reading",
         "return_to_in_read": "Return to \"In read\""
+    },
+    "tags-dashboard": {
+        "text": "Filtered by tags:",
+        "clear_tags": "clear"
     }
 }
