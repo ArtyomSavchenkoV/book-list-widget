@@ -9,7 +9,7 @@ type TProps = {
     author: string,
     title: string,
     description: string,
-    tags: JSX.Element[]
+    tags: JSX.Element
 }
 const Layout: React.FC<TProps> = ({
     changeStatusButton,
@@ -38,7 +38,7 @@ const Layout: React.FC<TProps> = ({
             <div className="content">
                 {description}
             </div>
-            <div className="tags">
+            <div className="tags-container">
                 {tags}
             </div>
         </div>

@@ -12,6 +12,9 @@
         border-top: none;
         border-left: none;
         user-select: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     >.tab:last-child {
         border-right: none;

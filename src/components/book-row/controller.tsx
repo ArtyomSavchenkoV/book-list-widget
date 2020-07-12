@@ -10,7 +10,7 @@ import { changeBookStatus } from '../../actions';
 
 import Layout from './views/layout';
 import ChangeStatusButton from './views/change-status-button';
-import Tag from '../common/tag';
+import Tags from '../common/tags';
 
 type TProps = {
     currentPage: 'TO_READ' | 'IN_PROGRESS' | 'DONE',
@@ -38,9 +38,6 @@ const Controller: React.FC<TProps & TWithLocalization & IConnect<typeof storeEnc
             returnToInReadText={localize('book.return_to_in_read')}
         />
     )
-    const tags: JSX.Element[] = book.tags.map((tag, index) => {
-        return <Tag key={index} tag={tag} />
-    })
     return (
         <Layout 
             changeStatusButton={changeStatusButton}
@@ -48,7 +45,7 @@ const Controller: React.FC<TProps & TWithLocalization & IConnect<typeof storeEnc
             author={book.author}
             title={book.title}
             description={book.description}
-            tags={tags}
+            tags={<Tags tags={book.tags} />}
         />
     )
 }
