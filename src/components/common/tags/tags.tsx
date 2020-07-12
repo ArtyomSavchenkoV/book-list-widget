@@ -5,6 +5,8 @@ import { IConnect } from '../../../reducers';
 
 import { switchFilterTag } from '../../../actions';
 
+import Tag from '../tag';
+
 import './tags.scss';
 
 
@@ -18,9 +20,9 @@ const Tags: React.FC<TProps & IConnect<typeof storeEnchancer>> = ({
 
     const tagsElements = tags.map((tag, index) => {
         return (
-            <div key={index} className="tag" onClick={() => switchFilterTag(tag)}>
+            <Tag key={index} switchFilterTag={switchFilterTag}>
                 {tag}
-            </div>
+            </Tag>
         )
     })
 

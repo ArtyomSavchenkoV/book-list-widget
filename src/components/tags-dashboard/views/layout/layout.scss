@@ -2,8 +2,13 @@
     padding: 30px;
     border-bottom: 1px solid;
     border-color: inherit;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
 
     .clear-button {
         margin-left: .3em;
+        user-select: none;
+        cursor: pointer;
     }
 }

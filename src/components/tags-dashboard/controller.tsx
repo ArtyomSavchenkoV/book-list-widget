@@ -8,6 +8,7 @@ import { IConnect, TStore } from '../../reducers';
 
 import { setFilterTags, switchFilterTag } from '../../actions';
 
+import Tag from '../common/tag';
 import Layout from './views/layout';
 
 type TProps = {
@@ -19,12 +20,20 @@ const Controller: React.FC<TProps & TWithLocalization & IConnect<typeof storeEnc
     localize
 }) => {
 
+    const tags = selectedFilterTags.map((tag, index) => {
+        return (
+            <Tag key={index} switchFilterTag={switchFilterTag}>
+                {tag}
+            </Tag>
+        )
+    })
+
     const content: JSX.Element | null = selectedFilterTags.length > 0 ? (
         <Layout
             text={localize('tags-dashboard.text')}
             clearButtonText={localize('tags-dashboard.clear_tags')}
             onClearButtonClick={() => { setFilterTags([]) }}
-            tags={[]}
+            tags={tags}
         />
     ) : null;
 
