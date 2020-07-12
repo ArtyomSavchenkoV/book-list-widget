@@ -13,22 +13,42 @@ const fetchBooksRequested: TFetchBooksRequested = () => {
 
 
 type TFetchBooksSuccess = {
-    (books: {
-        id: string,
-        author: string,
-        title: string,
-        description: string,
-        tags: string[]
-    }[]): TAction
+    (arg0: {
+        books: {
+            id: string,
+            author: string,
+            title: string,
+            description: string,
+            tags: string[]
+        }[],
+        booksInProgressMask: string,
+        booksDoneMask: string
+    }): TAction
 }
-const fetchBooksSuccess: TFetchBooksSuccess = (books) => {
-    // TODO: create books arrays by saved status 
+const fetchBooksSuccess: TFetchBooksSuccess = ({ books, booksInProgressMask, booksDoneMask }) => {
+    // create books arrays by saved status 
+    const booksInProgressMaskSet = booksInProgressMask.split(',');
+    const booksDoneMaskSet = booksDoneMask.split(',');
+    
+    let booksToRead = [];
+    let booksInProgress = [];
+    let booksDone = [];
+    for (let book of books) {
+        if (booksInProgressMaskSet.includes(book.id)) {
+            booksInProgress.push(book);
+        } else if (booksDoneMaskSet.includes(book.id)) {
+            booksDone.push(book)
+        } else {
+            booksToRead.push(book)
+        }
+    }
+    
     return {
         type: 'FETCH_BOOKS_SUCCESS',
         payload: {
-            booksToRead: books,
-            booksInProgress: [],
-            booksDone: []
+            booksToRead,
+            booksInProgress,
+            booksDone
         }
     }
 }
@@ -45,12 +65,16 @@ const fetchBooksFailure: TFetchBooksFailure = () => {
 
 
 interface IFetchBooksRequest {
-    (ApiService: IApiService): (arg0: any) => void
+    (arg0: {
+        ApiService: IApiService,
+        booksInProgressMask: string,
+        booksDoneMask: string
+    }): (arg0: any) => void
 }
-const fetchBooksRequest: IFetchBooksRequest = (ApiService) => (dispatch) => {
+const fetchBooksRequest: IFetchBooksRequest = ({ ApiService, booksInProgressMask, booksDoneMask }) => (dispatch) => {
     dispatch(fetchBooksRequested());
     ApiService.getBooksRequest().then((request) => {
-        dispatch(fetchBooksSuccess(request));
+        dispatch(fetchBooksSuccess({ books: request, booksInProgressMask, booksDoneMask }));
     })
         .catch(() => {
             dispatch(fetchBooksFailure());

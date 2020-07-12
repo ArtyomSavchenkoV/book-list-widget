@@ -1,4 +1,5 @@
 import React from 'react';
+import { useCookies } from 'react-cookie';
 import { connect } from 'react-redux';
 import withErrorBoundary from '../hoc/with-error-boundary';
 import withApiService, { TWithApiService } from '../hoc/with-api-service';
@@ -26,11 +27,11 @@ const Controller: React.FC<TProps & TWithApiService & TWithLocalization & IConne
     ApiService,
     localize
 }) => {
-
+    const cookie = useCookies(['inProgress', 'done'])[0];
     let content: JSX.Element | JSX.Element[] = <NoticePanel><Spinner /></NoticePanel>;
     switch (booksStatus) {
         case 'EMPTY': {
-            fetchBooksRequest(ApiService);
+            fetchBooksRequest({ApiService, booksInProgressMask: cookie.inProgress, booksDoneMask: cookie.done});
             break;
         }
         case 'READY': {
