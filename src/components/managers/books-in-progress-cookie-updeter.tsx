@@ -15,7 +15,7 @@ const BooksInProgressCookieUpdater: React.FC<TProps & IConnect<typeof storeEncha
         const list = booksInProgress.reduce<string>((prevResult, book, index) => {
             return prevResult + (index > 0 ? ',' : '') + book.id
         }, '');
-        setCookie('inProgress', list)
+        setCookie('inProgress', list, { secure: true })
     }
     return null
 }

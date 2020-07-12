@@ -13,6 +13,17 @@ export type TWithLocalization = {
 type TType = <T>(arg0: React.FC<T | object>) => React.FC<Omit<T, 'localize'>>;
 const withLocalization: TType = (Component) => (props) => {
 
+    const mapStoreToProps = ({ applicationStateStore }: TStore) => {
+        return {
+            dictionary: applicationStateStore.localization.dictionary
+        };
+    };
+    const storeEnhancer = connect(mapStoreToProps);
+
+    /*
+    *   This component gets a localization dictionary from the Store, it's don't change "props"
+    *   And return target component with localization function.
+    */
     const Wrapper: React.FC<IConnect<typeof storeEnhancer>> = ({
         dictionary
     }) => {
@@ -49,13 +60,6 @@ const withLocalization: TType = (Component) => (props) => {
             />
         )
     }
-
-    const mapStoreToProps = ({ applicationStateStore }: TStore) => {
-        return {
-            dictionary: applicationStateStore.localization.dictionary
-        };
-    };
-    const storeEnhancer = connect(mapStoreToProps);
     const Wrapped = storeEnhancer(Wrapper);
 
     return (
