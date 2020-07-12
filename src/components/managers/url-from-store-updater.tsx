@@ -5,7 +5,7 @@ import { TStore, IConnect } from '../../reducers';
 type TProps = {
 
 }
-const UrlUpdater: React.FC<TProps & IConnect<typeof storeEnchancer>> = ({
+const UrlFromStoreUpdater: React.FC<TProps & IConnect<typeof storeEnchancer>> = ({
     tags,
     tabs
 }) => {   
@@ -43,4 +43,4 @@ const mapStoreToProps = ({ booksStore, applicationStateStore }: TStore) => {
     }
 }
 const storeEnchancer = connect(mapStoreToProps);
-export default storeEnchancer(UrlUpdater) as React.FC<TProps>;
+export default storeEnchancer(UrlFromStoreUpdater) as React.FC<TProps>;

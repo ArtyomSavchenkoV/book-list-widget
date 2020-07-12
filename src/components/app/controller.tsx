@@ -11,7 +11,7 @@ import { IConnect, TStore } from '../../reducers';
 import Layout from './views/layout';
 import LocalizationLoader from '../localization-loader';
 import Landing from '../landing';
-import UrlUpdater from '../updaters/url-updater'
+import UrlFromStoreUpdater from '../managers/url-from-store-updater'
 
 type TApp = {
 };
@@ -30,7 +30,7 @@ const App: React.FC<TApp & IConnect<typeof storeEnhancer> & TWithLocalization> =
             <Layout title={localize('app.title')}>
                 {content}
             </Layout>
-            <UrlUpdater />
+            <UrlFromStoreUpdater />
         </>
     );
 };
