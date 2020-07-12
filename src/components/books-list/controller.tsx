@@ -7,11 +7,12 @@ import compose from '../../utils/compose';
 
 import { TStore, IConnect } from '../../reducers';
 
-import { fetchBooksRequest } from '../../actions';
+import { fetchBooksRequest, changeBookStatus } from '../../actions';
 
 import Layout from './views/layout';
 import NoticePanel from './views/notice-panel';
 import Book from './views/book';
+import ChangeStatusButton from './views/change-status-button';
 import Spinner from '../common/spinner';
 
 
@@ -22,6 +23,7 @@ const Controller: React.FC<TProps & TWithApiService & TWithLocalization & IConne
     booksList,
     booksStatus,
     fetchBooksRequest,
+    changeBookStatus,
     ApiService,
     localize
 }) => {
@@ -36,8 +38,24 @@ const Controller: React.FC<TProps & TWithApiService & TWithLocalization & IConne
             if (booksList.length === 0) {
                 content = <NoticePanel>{localize('book-list.list_is_empty')}</NoticePanel>
             } else {
+
                 content = booksList.map((el) => {
-                    return <Book key={el.id} />
+                    const changeStatusButton = (
+                        <ChangeStatusButton
+                            key={el.id}
+                            bookId={el.id}
+                            currentPage={currentPage}
+                            changeBookStatus={changeBookStatus}
+                            startReadingText={localize('book.start_reading')}
+                            finishReadingText={localize('book.finish_reading')}
+                            returnToInReadText={localize('book.return_to_in_read')}
+                        />)
+                    return (
+                        <Book
+                            key={el.id}
+                            changeStatusButton={changeStatusButton}
+                        />
+                    )
                 })
             }
             break;
@@ -79,7 +97,8 @@ const mapStoreToProps = ({ applicationStateStore, booksStore }: TStore) => {
     }
 }
 const mapDispatchToProps = {
-    fetchBooksRequest
+    fetchBooksRequest,
+    changeBookStatus
 }
 const storeEnchancer = connect(mapStoreToProps, mapDispatchToProps);
 

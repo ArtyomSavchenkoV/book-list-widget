@@ -10,5 +10,10 @@
     },
     "book-list": {
         "list_is_empty": "List is empty"
+    },
+    "book": {
+        "start_reading": "Start reading",
+        "finish_reading": "Finish reading",
+        "return_to_in_read": "Return to \"In read\""
     }
 }

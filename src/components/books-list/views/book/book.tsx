@@ -4,10 +4,10 @@ import './book.scss';
 
 
 type TProps = {
-
+    changeStatusButton: JSX.Element
 }
 const Book: React.FC<TProps> = ({
-
+    changeStatusButton
 }) => {
 
     return (
@@ -22,7 +22,7 @@ const Book: React.FC<TProps> = ({
                     </div>
                 </div>
                 <div className="action">
-                    ##action
+                    {changeStatusButton}
                 </div>
             </div>
             <div className="content">
