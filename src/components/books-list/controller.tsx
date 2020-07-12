@@ -7,7 +7,7 @@ import compose from '../../utils/compose';
 
 import { TStore, IConnect } from '../../reducers';
 
-import { fetchBooksRequest, changeBookStatus } from '../../actions';
+import { fetchBooksRequest } from '../../actions';
 
 import Layout from './views/layout';
 import NoticePanel from './views/notice-panel';
@@ -20,9 +20,9 @@ type TProps = {
 const Controller: React.FC<TProps & TWithApiService & TWithLocalization & IConnect<typeof storeEnchancer>> = ({
     currentPage,
     booksList,
+    selectedFilterTags,
     booksStatus,
     fetchBooksRequest,
-    changeBookStatus,
     ApiService,
     localize
 }) => {
@@ -34,25 +34,32 @@ const Controller: React.FC<TProps & TWithApiService & TWithLocalization & IConne
             break;
         }
         case 'READY': {
-            if (booksList.length === 0) {
+            const booksElements = booksList.filter((book) => {
+                if (selectedFilterTags.length === 0) {
+                    return true;
+                }
+                return selectedFilterTags.reduce<boolean>((prevResult, tag) => {
+                    return prevResult === false ? false : book.tags.includes(tag)
+                }, true);
+            }).map((el) => {
+                return (
+                    <BookRow
+                        key={el.id}
+                        book={el}
+                        currentPage={currentPage}
+                    />
+                )
+            })
+            if (booksElements.length === 0) {
                 content = <NoticePanel>{localize('book-list.list_is_empty')}</NoticePanel>
             } else {
-
-                content = booksList.map((el) => {
-                    return (
-                        <BookRow
-                            key={el.id}
-                            book={el}
-                            currentPage={currentPage}
-                        />
-                    )
-                })
+                content = booksElements;
             }
             break;
         }
         default: { }
     }
-    console.log(booksList);
+    
 
     return (
         <Layout>
@@ -83,12 +90,12 @@ const mapStoreToProps = ({ applicationStateStore, booksStore }: TStore) => {
     return {
         currentPage,
         booksList,
-        booksStatus: booksStore.dataStatus
+        booksStatus: booksStore.dataStatus,
+        selectedFilterTags: booksStore.selectedFilterTags
     }
 }
 const mapDispatchToProps = {
-    fetchBooksRequest,
-    changeBookStatus
+    fetchBooksRequest
 }
 const storeEnchancer = connect(mapStoreToProps, mapDispatchToProps);
 
