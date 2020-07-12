@@ -74,7 +74,6 @@ const getPageAndTags: () => { page: 'TO_READ' | 'IN_PROGRESS' | 'DONE', tags: st
     if (typeof tagsString === 'string') {
         tags = tagsString.split(',')
     }
-    //console.log(urlSearchParams.get('tab'), urlSearchParams.get('tags'));
 
     return {
         page,

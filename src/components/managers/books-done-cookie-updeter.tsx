@@ -15,7 +15,7 @@ const BooksDoneCookieUpdater: React.FC<TProps & IConnect<typeof storeEnchancer>>
         const list = booksDone.reduce<string>((prevResult, book, index) => {
             return prevResult + (index > 0 ? ',' : '') + book.id
         }, '');
-        setCookie('done', list)
+        setCookie('done', list, { secure: true })
     }
     return null
 }

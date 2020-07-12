@@ -7,8 +7,7 @@ import './layout.scss';
 
 type TProps = {
 };
-const Layout: React.FC<TProps> = ({
-}) => {
+const Layout: React.FC<TProps> = () => {
 
     return (
         <div className="localization-loader">
