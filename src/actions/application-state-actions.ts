@@ -38,12 +38,12 @@ interface IFetchDictionaryRequest {
 }
 const fetchDictionaryRequest: IFetchDictionaryRequest = (ApiService) => (dispatch) => {
     dispatch(fetchDictionaryRequested());
-    ApiService.getDictionaryRequest().then((request)=>{        
+    ApiService.getDictionaryRequest().then((request) => {
         dispatch(fetchDictionarySuccess(request));
     })
-    .catch(()=>{
-        dispatch(fetchDictionaryFailure());
-    })
+        .catch(() => {
+            dispatch(fetchDictionaryFailure());
+        })
 
 }
 
@@ -59,7 +59,22 @@ const setPage: ISetPage = (newPage) => {
 }
 
 
+interface ISetPageAndTags {
+    (arg0: {
+        page: 'TO_READ' | 'IN_PROGRESS' | 'DONE',
+        tags: string[]
+    }): TAction
+}
+const setPageAndTags: ISetPageAndTags = (payload) => {    
+    return {
+        type: 'SET_PAGE_AND_TAGS',
+        payload: payload
+    }
+}
+
+
 export {
     fetchDictionaryRequest,
-    setPage
+    setPage,
+    setPageAndTags
 }

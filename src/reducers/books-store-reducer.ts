@@ -124,6 +124,14 @@ const booksStoreReducer: IBooksStoreReducer = (booksStore = initialBooksStore, a
         }
 
 
+        case 'SET_PAGE_AND_TAGS': {
+            return {
+                ...booksStore,
+                selectedFilterTags: action.payload.tags
+            }
+        }
+
+
         default: return {
             ...booksStore
         }

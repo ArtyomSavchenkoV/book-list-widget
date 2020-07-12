@@ -13,6 +13,12 @@ export type TApplicationStateStoreReducerCommands = {
 } | {
     type: 'SET_PAGE',
     payload: 'TO_READ' | 'IN_PROGRESS' | 'DONE'
+} | {
+    type: 'SET_PAGE_AND_TAGS',
+    payload: {
+        page: 'TO_READ' | 'IN_PROGRESS' | 'DONE',
+        tags: string[]
+    }
 };
 
 /*
@@ -83,6 +89,14 @@ const applicationStateStoreReducer: IApplicationStateStoreReducer = (application
             return {
                 ...applicationStateStore,
                 currentPage: action.payload
+            }
+        }
+
+
+        case 'SET_PAGE_AND_TAGS': {
+            return {
+                ...applicationStateStore,
+                currentPage: action.payload.page
             }
         }
 

@@ -1,6 +1,7 @@
 import {
     fetchDictionaryRequest,
-    setPage
+    setPage,
+    setPageAndTags
 } from './application-state-actions';
 import {
     fetchBooksRequest,
@@ -11,6 +12,7 @@ import {
 export {
     fetchDictionaryRequest,
     setPage,
+    setPageAndTags,
 
     fetchBooksRequest,
     changeBookStatus,
