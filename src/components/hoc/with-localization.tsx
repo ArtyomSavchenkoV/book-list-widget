@@ -50,9 +50,9 @@ const withLocalization: TType = (Component) => (props) => {
         )
     }
 
-    const mapStoreToProps = ({ applicationState }: TStore) => {
+    const mapStoreToProps = ({ applicationStateStore }: TStore) => {
         return {
-            dictionary: applicationState.localization.dictionary
+            dictionary: applicationStateStore.localization.dictionary
         };
     };
     const storeEnhancer = connect(mapStoreToProps);

@@ -1,7 +1,8 @@
 
 import { InferableComponentEnhancerWithProps } from 'react-redux';
 
-import applicationStateReducer, { TApplicationStateAction, TApplicationStateStore} from './application-state-reducer';
+import applicationStateStoreReducer, { TApplicationStateStoreReducerCommands, TApplicationStateStore} from './application-state-store-reducer';
+import booksStoreReducer, { TBooksStoreReducerCommands, TBooksStore} from './books-store-reducer';
 
 /*
 *   React-Redux type
@@ -15,22 +16,22 @@ export type IConnect<T> = T extends InferableComponentEnhancerWithProps<infer Pr
 *   Commands types
 */
 export type TAction = (
-    TApplicationStateAction
+    TApplicationStateStoreReducerCommands
+    | TBooksStoreReducerCommands
 );
 
 /*
 *   Store type
 */
 export type TStore = {
-    applicationState: TApplicationStateStore
+    applicationStateStore: TApplicationStateStore
+    booksStore: TBooksStore
 };
 
 /*
 *   Initial store
 */
-const initStore = {
-    applicationState: undefined,
-};
+const initStore = {};
 
 /*
 *   The Reducer
@@ -43,7 +44,8 @@ const reducer: IReducer = (store = initStore, action) => {
 
         default: return {
             ...store,
-            applicationState: applicationStateReducer(store.applicationState, action)
+            applicationStateStore: applicationStateStoreReducer(store.applicationStateStore, action),
+            booksStore: booksStoreReducer(store.booksStore, action)
         }
     }
 };

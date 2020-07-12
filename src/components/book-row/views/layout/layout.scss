@@ -1,0 +1,32 @@
+.book-row {
+    border-top: 1px solid;
+    border-color: inherit;
+    padding: 15px;
+
+    >.header {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-bottom: 15px;
+
+        >.book-requisites {
+
+            >.title {
+                font-size: 1.4em;
+                font-weight: 600;
+            }
+        }
+        >.action {
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+        }
+    }
+    >.content {
+        margin-bottom: 15px;
+    }
+}
+
+.books-list .book-row:first-child {
+    border-top: none;
+}

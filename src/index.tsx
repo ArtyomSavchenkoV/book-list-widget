@@ -3,6 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
+import { ApiServiceProvider } from "./components/contexts/api-service-context";
+import ApiServiceClass from './services/api-service';
 
 //  Import store
 import store from './store';
@@ -11,6 +13,7 @@ import store from './store';
 import App from './components/app';
 import ErrorBoundary from './components/common/error-boundary';
 
+const ApiService = new ApiServiceClass();
 
 /*
 *   Render
@@ -18,7 +21,9 @@ import ErrorBoundary from './components/common/error-boundary';
 ReactDOM.render((
     <Provider store={store}>
         <ErrorBoundary>
-            <App />
+            <ApiServiceProvider value={ApiService}>
+                <App />
+            </ApiServiceProvider>
         </ErrorBoundary>
     </Provider>
 ), document.getElementById('root'));

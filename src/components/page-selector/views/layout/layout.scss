@@ -1,0 +1,26 @@
+.page-selector {
+    display: flex;
+
+    >.tab {
+        width: 100%;
+        background-color: #fff;
+        cursor: pointer;
+        padding: 20px 10px;
+        text-align: center;
+        border: 1px solid;
+        border-color: inherit;
+        border-top: none;
+        border-left: none;
+        user-select: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    >.tab:last-child {
+        border-right: none;
+    }
+    >.tab.selected {
+        border-bottom-color: transparent;
+        font-weight: 600;
+    }
+}

@@ -1,0 +1,12 @@
+.book-row .change-status-button {
+    cursor: pointer;
+    user-select: none;
+
+    >.title {
+        text-decoration: underline;
+        font-weight: 600;
+    }
+    >.icon {
+        margin-left: .3em;
+    }
+}
