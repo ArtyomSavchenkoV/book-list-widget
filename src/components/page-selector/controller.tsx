@@ -29,12 +29,9 @@ const Controller: React.FC<TProps & TWithLocalization & IConnect<typeof storeEnc
         <Layout
             onSelectPage={setPage}
 
-            toReadText={localize('page-selector.to_read')}
-            inProgressText={localize('page-selector.in_progress')}
-            doneText={localize('page-selector.done')}
-            booksToReadCount={booksToReadCount}
-            booksInProgressCount={booksInProgressCount}
-            booksDoneCount={booksDoneCount}
+            toReadText={localize('page-selector.to_read', {count: booksToReadCount})}
+            inProgressText={localize('page-selector.in_progress', {count: booksInProgressCount})}
+            doneText={localize('page-selector.done', {count: booksDoneCount})}
 
             currentPage={currentPage}
         />

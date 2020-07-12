@@ -3,12 +3,9 @@
         "fetch_dictionary_failure": "Fetch dictionary failure.",
         "fetch_books_failure": "Fetch books failure."
     },
-    "app": {
-        "title": "Книжки!"
-    },
     "page-selector": {
-        "to_read": "To read",
-        "in_progress": "In progress",
-        "done": "Done"
+        "to_read": "To read (<{count}>)",
+        "in_progress": "In progress (<{count}>)",
+        "done": "Done (<{count}>)"
     }
 }

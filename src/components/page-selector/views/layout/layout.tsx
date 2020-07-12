@@ -8,9 +8,6 @@ type TProps = {
     toReadText: string,
     inProgressText: string,
     doneText: string,
-    booksToReadCount: number,
-    booksInProgressCount: number,
-    booksDoneCount: number,
     currentPage: 'TO_READ' | 'IN_PROGRESS' | 'DONE'
 }
 const Layout: React.FC<TProps> = ({
@@ -18,9 +15,6 @@ const Layout: React.FC<TProps> = ({
     toReadText,
     inProgressText,
     doneText,
-    booksToReadCount,
-    booksInProgressCount,
-    booksDoneCount,
     currentPage
 }) => {
 
@@ -30,19 +24,19 @@ const Layout: React.FC<TProps> = ({
                 onClick={() => onSelectPage('TO_READ')}
                 className={'' + (currentPage === 'TO_READ' ? ' selected' : '')}
             >
-                {`${toReadText} (${booksToReadCount})`}
+                {toReadText}
             </button>
             <button
                 onClick={() => onSelectPage('IN_PROGRESS')}
                 className={'' + (currentPage === 'IN_PROGRESS' ? ' selected' : '')}
             >
-                {`${inProgressText} (${booksInProgressCount})`}
+                {inProgressText}
             </button>
             <button
                 onClick={() => onSelectPage('DONE')}
                 className={'' + (currentPage === 'DONE' ? ' selected' : '')}
             >
-                {`${doneText} (${booksDoneCount})`}
+                {doneText}
             </button>
         </div>
     )
