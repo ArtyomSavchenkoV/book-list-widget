@@ -1,4 +1,4 @@
-.books-list .book {
+.book-row {
     border-top: 1px solid;
     border-color: inherit;
     padding: 15px;
@@ -15,7 +15,7 @@
 
             }
             >.title {
-                font-size: 1.5em;
+                font-size: 1.4em;
                 font-weight: 600;
             }
         }
@@ -33,6 +33,6 @@
     }
 }
 
-.books-list .book:first-child {
+.books-list .book-row:first-child {
     border-top: none;
 }

@@ -11,8 +11,7 @@ import { fetchBooksRequest, changeBookStatus } from '../../actions';
 
 import Layout from './views/layout';
 import NoticePanel from './views/notice-panel';
-import Book from './views/book';
-import ChangeStatusButton from './views/change-status-button';
+import BookRow from '../book-row';
 import Spinner from '../common/spinner';
 
 
@@ -40,20 +39,11 @@ const Controller: React.FC<TProps & TWithApiService & TWithLocalization & IConne
             } else {
 
                 content = booksList.map((el) => {
-                    const changeStatusButton = (
-                        <ChangeStatusButton
-                            key={el.id}
-                            bookId={el.id}
-                            currentPage={currentPage}
-                            changeBookStatus={changeBookStatus}
-                            startReadingText={localize('book.start_reading')}
-                            finishReadingText={localize('book.finish_reading')}
-                            returnToInReadText={localize('book.return_to_in_read')}
-                        />)
                     return (
-                        <Book
+                        <BookRow
                             key={el.id}
-                            changeStatusButton={changeStatusButton}
+                            book={el}
+                            currentPage={currentPage}
                         />
                     )
                 })
