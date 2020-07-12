@@ -39,7 +39,7 @@ const Controller: React.FC<TProps & TWithLocalization & IConnect<typeof storeEnc
         />
     )
     const tags: JSX.Element[] = book.tags.map((tag, index) => {
-        return <Tag key={index} tag={tag} onClick={() => {}} />
+        return <Tag key={index} tag={tag} />
     })
     return (
         <Layout 

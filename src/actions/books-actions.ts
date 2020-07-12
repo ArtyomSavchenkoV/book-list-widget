@@ -73,14 +73,10 @@ const changeBookStatus: IChangeBookStatus = (payload) => {
 }
 
 
-interface ISwitchFilterTag {
-    (tag: string): TAction
+interface ISetFilterTags {
+    (tag: string[]): TAction
 }
-const switchFilterTag: ISwitchFilterTag = (tag) => {
-    // TODO: get tags from URL
-    // TODO: switch tag
-    const newTags = [tag];
-    // TODO: set new tags to URL
+const setFilterTags: ISetFilterTags = (newTags) => {
     return {
         type: 'SET_FILTER_TAGS',
         payload: newTags
@@ -88,8 +84,20 @@ const switchFilterTag: ISwitchFilterTag = (tag) => {
 }
 
 
+interface ISwitchFilterTag {
+    (tag: string): TAction
+}
+const switchFilterTag: ISwitchFilterTag = (tag) => {
+    return {
+        type: 'SWITCH_FILTER_TAG',
+        payload: tag
+    }
+}
+
+
 export {
     fetchBooksRequest,
     changeBookStatus,
+    setFilterTags,
     switchFilterTag
 }

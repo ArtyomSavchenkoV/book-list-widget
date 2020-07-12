@@ -32,6 +32,9 @@ export type TBooksStoreReducerCommands = {
 } | {
     type: 'SET_FILTER_TAGS',
     payload: string[]
+} | {
+    type: 'SWITCH_FILTER_TAG',
+    payload: string
 };
 
 
@@ -63,7 +66,7 @@ const initialBooksStore: TBooksStore = {
 *   The Reducer
 */
 interface IBooksStoreReducer {
-    (arg0: TBooksStore | undefined, arg1: TAction): TBooksStore;
+    (arg0: TBooksStore, arg1: TAction): TBooksStore;
 };
 const booksStoreReducer: IBooksStoreReducer = (booksStore = initialBooksStore, action) => {
     switch (action.type) {
@@ -120,6 +123,27 @@ const booksStoreReducer: IBooksStoreReducer = (booksStore = initialBooksStore, a
             return {
                 ...booksStore,
                 selectedFilterTags: action.payload
+            }
+        }
+
+
+        case 'SWITCH_FILTER_TAG': {
+            const tagIndex = booksStore.selectedFilterTags.indexOf(action.payload);
+            let newTags = [];
+            if (tagIndex < 0) {
+                newTags = [
+                    ...booksStore.selectedFilterTags,
+                    action.payload
+                ]
+            } else {
+                newTags = [
+                    ...booksStore.selectedFilterTags.slice(0, tagIndex),
+                    ...booksStore.selectedFilterTags.slice(tagIndex + 1)
+                ]
+            }
+            return {
+                ...booksStore,
+                selectedFilterTags: newTags
             }
         }
 

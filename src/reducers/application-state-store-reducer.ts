@@ -47,7 +47,7 @@ const initialApplicationStateStore: TApplicationStateStore = {
 *   The Reducer
 */
 interface IApplicationStateStoreReducer {
-    (arg0: TApplicationStateStore | undefined, arg1: TAction): TApplicationStateStore;
+    (arg0: TApplicationStateStore, arg1: TAction): TApplicationStateStore;
 };
 const applicationStateStoreReducer: IApplicationStateStoreReducer = (applicationStateStore = initialApplicationStateStore, action) => {
     switch (action.type) {

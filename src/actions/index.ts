@@ -6,6 +6,7 @@ import {
 import {
     fetchBooksRequest,
     changeBookStatus,
+    setFilterTags,
     switchFilterTag
 } from './books-actions';
 
@@ -16,5 +17,6 @@ export {
 
     fetchBooksRequest,
     changeBookStatus,
+    setFilterTags,
     switchFilterTag
 }
