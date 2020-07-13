@@ -2,7 +2,8 @@ import React from 'react';
 import ErrorBoundary from '../common/error-boundary';
 
 
-const withErrorBoundary = (Component) => {
+type TType = <T>(arg0: React.FC<T | object>) => React.FC<T>;
+const withErrorBoundary:TType = (Component) => {
     return (props) => {
         return (
             <ErrorBoundary>
