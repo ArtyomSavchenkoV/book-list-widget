@@ -35,9 +35,8 @@ serviceWorker.unregister();
 
 
 if (window.performance) {
-    console.log("Perfomance not supported");
+    console.warn("Perfomance not supported");
 }
-if (performance.navigation.type == 1) {
+if (performance.navigation.type === 1) {
     localStorage.clear();
-} else {
 }
