@@ -1,21 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { TStore, IConnect } from '../../reducers';
-import { useCookies } from 'react-cookie';
 
 type TProps = {
 
 }
-const BooksInProgressCookieUpdater: React.FC<TProps & IConnect<typeof storeEnchancer>> = ({
+const BooksInProgressStorageUpdater: React.FC<TProps & IConnect<typeof storeEnchancer>> = ({
     booksInProgress,
     dataStatus
 }) => {
-    const setCookie = useCookies(['inProgress'])[1];
     if (dataStatus === 'READY') {
         const list = booksInProgress.reduce<string>((prevResult, book, index) => {
             return prevResult + (index > 0 ? ',' : '') + book.id
         }, '');
-        setCookie('inProgress', list, { secure: true })
+        window.localStorage.setItem('inProgress', list)
     }
     return null
 }
@@ -28,4 +26,4 @@ const mapStoreToProps = ({ booksStore }: TStore) => {
     }
 }
 const storeEnchancer = connect(mapStoreToProps);
-export default storeEnchancer(BooksInProgressCookieUpdater) as React.FC<TProps>;
+export default storeEnchancer(BooksInProgressStorageUpdater) as React.FC<TProps>;

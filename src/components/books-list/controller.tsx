@@ -1,5 +1,4 @@
 import React from 'react';
-import { useCookies } from 'react-cookie';
 import { connect } from 'react-redux';
 import withErrorBoundary from '../hoc/with-error-boundary';
 import withApiService, { TWithApiService } from '../hoc/with-api-service';
@@ -27,11 +26,12 @@ const Controller: React.FC<TProps & TWithApiService & TWithLocalization & IConne
     ApiService,
     localize
 }) => {
-    const cookie = useCookies(['inProgress', 'done'])[0];
+    const doneLocalStorage = window.localStorage.getItem('done') || '';
+    const inProgressLocalStorage = window.localStorage.getItem('inProgress') || '';
     let content: JSX.Element | JSX.Element[] = <NoticePanel><Spinner /></NoticePanel>;
     switch (booksStatus) {
         case 'EMPTY': {
-            fetchBooksRequest({ApiService, booksInProgressMask: cookie.inProgress, booksDoneMask: cookie.done});
+            fetchBooksRequest({ApiService, booksInProgressMask: inProgressLocalStorage, booksDoneMask: doneLocalStorage});
             break;
         }
         case 'READY': {
@@ -56,6 +56,10 @@ const Controller: React.FC<TProps & TWithApiService & TWithLocalization & IConne
             } else {
                 content = booksElements;
             }
+            break;
+        }
+        case 'FAILURE': {
+            content = <NoticePanel>{localize('book-list.fetch_books_failure')}</NoticePanel>;
             break;
         }
         default: { }

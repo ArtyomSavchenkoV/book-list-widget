@@ -2,7 +2,11 @@ import React from 'react';
 
 import './error-boundary-indicator.css';
 
-const ErrorBoundaryIndicator = ({error}) => {
+
+type TProps = {
+    error: string    
+}
+const ErrorBoundaryIndicator: React.FC<TProps> = ({error}) => {
     console.log(error);
     return (
         <div className="error-boundary-indicator">
@@ -11,5 +15,6 @@ const ErrorBoundaryIndicator = ({error}) => {
         </div>
     )
 };
+
 
 export default ErrorBoundaryIndicator;
