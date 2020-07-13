@@ -58,6 +58,10 @@ const Controller: React.FC<TProps & TWithApiService & TWithLocalization & IConne
             }
             break;
         }
+        case 'FAILURE': {
+            content = <NoticePanel>{localize('book-list.fetch_books_failure')}</NoticePanel>;
+            break;
+        }
         default: { }
     }
     

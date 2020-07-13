@@ -9,7 +9,8 @@
         "done": "Done (<{count}>)"
     },
     "book-list": {
-        "list_is_empty": "List is empty"
+        "list_is_empty": "List is empty",
+        "fetch_books_failure": "Fetch books failure"
     },
     "book": {
         "start_reading": "Start reading",
