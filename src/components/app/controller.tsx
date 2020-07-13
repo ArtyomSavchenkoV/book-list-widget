@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import compose from '../../utils/compose';
 
-import withLocalization, { TWithLocalization } from '../hoc/with-localization';
 import withErrorBoundary from '../hoc/with-error-boundary';
 
 //  Import types
@@ -18,9 +17,8 @@ import BooksDoneStorageUpdater from '../managers/books-done-storage-updeter';
 
 type TApp = {
 };
-const App: React.FC<TApp & IConnect<typeof storeEnhancer> & TWithLocalization> = ({
+const App: React.FC<TApp & IConnect<typeof storeEnhancer>> = ({
     dictionaryStatus,
-    localize
 }) => {
     const content = (dictionaryStatus !== 'READY' && dictionaryStatus !== 'FAILURE') ? (
         <LocalizationLoader />
@@ -55,6 +53,5 @@ const storeEnhancer = connect(mapStoreToProps, mapDispatchToProps);
 
 export default compose(
     withErrorBoundary,
-    storeEnhancer,
-    withLocalization
+    storeEnhancer
 )(App) as React.FC<TApp>;
