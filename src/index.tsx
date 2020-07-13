@@ -33,10 +33,9 @@ ReactDOM.render((
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
-
-if (window.performance) {
-    console.warn("Perfomance not supported");
-}
+/*
+*   Clean the "localStore" when the page was refreshed.
+*/
 if (performance.navigation.type === 1) {
     localStorage.clear();
 }
