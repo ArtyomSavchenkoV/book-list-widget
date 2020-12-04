@@ -8,7 +8,7 @@ import withErrorBoundary from '../hoc/with-error-boundary';
 import { IConnect, TStore } from '../../reducers';
 
 import Layout from './views/layout';
-import LocalizationLoader from '../localization-loader';
+import InitialLoader from '../initial-loader';
 import Landing from '../landing';
 import UrlFromStoreUpdater from '../managers/url-from-store-updater';
 import StoreFromUrlUpdater from '../managers/store-from-url-updater';
@@ -21,7 +21,7 @@ const App: React.FC<TApp & IConnect<typeof storeEnhancer>> = ({
     dictionaryStatus,
 }) => {
     const content = (dictionaryStatus !== 'READY' && dictionaryStatus !== 'FAILURE') ? (
-        <LocalizationLoader />
+        <InitialLoader />
     ) : (
             <Landing />
         );

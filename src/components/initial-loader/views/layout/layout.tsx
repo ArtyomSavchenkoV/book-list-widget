@@ -10,8 +10,8 @@ type TProps = {
 const Layout: React.FC<TProps> = () => {
 
     return (
-        <div className="localization-loader">
-            <div className="localization-loader-spinner">
+        <div className="initial-loader">
+            <div className="initial-loader-spinner">
                 <Spinner />
             </div>
         </div>
