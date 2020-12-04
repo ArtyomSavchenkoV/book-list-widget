@@ -1,13 +1,8 @@
+import { TBook } from '../../types/book-type';
 /*
 *   Response transformer
 */
-export type TGetBookResponse = {
-    id: string,
-    author: string,
-    title: string,
-    description: string,
-    tags: string[]
-}[];
+export type TGetBookResponse = TBook[];
 interface ITransformGetBookResponse {
     (arg0: any): TGetBookResponse
 }

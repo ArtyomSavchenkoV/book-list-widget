@@ -1,4 +1,4 @@
-import { TAction } from '../reducers';
+import { TAction } from '../types/actions-types';
 import { IApiService } from '../services/api-service';
 
 

@@ -8,11 +8,7 @@ import {
 } from '../actions/books-actions';
 
 export type TSagasCommands = {
-    type: 'FETCH_BOOKS_REQUEST',
-    payload: {
-        booksInProgressMask: string,
-        booksDoneMask: string
-    }
+    type: 'FETCH_BOOKS_REQUEST'
 };
 
 const sagaCreator = ({ ApiService }: { ApiService: IApiService }) => function* sagaWatcher() {
@@ -20,16 +16,31 @@ const sagaCreator = ({ ApiService }: { ApiService: IApiService }) => function* s
 }
 
 const fetchBooksRequestSagaWorkerCreator = ({ ApiService }: { ApiService: IApiService }) => function* fetchBooksRequestSagaWorker(action: {
-    type: 'FETCH_BOOKS_REQUEST',
-    payload: {
-        booksInProgressMask: string,
-        booksDoneMask: string
-    }
+    type: 'FETCH_BOOKS_REQUEST'
 }) {
     yield put(fetchBooksRequested());
     try {
-        const response = yield call(() => ApiService.getBooksRequest());
-        yield put(fetchBooksSuccess({ books: response, booksInProgressMask: action.payload.booksInProgressMask, booksDoneMask: action.payload.booksDoneMask }));
+        const books = yield call(() => ApiService.getBooksRequest());
+
+        const doneLocalStorage = window.localStorage.getItem('done') || '';
+        const inProgressLocalStorage = window.localStorage.getItem('inProgress') || '';
+        const booksDoneMaskSet = doneLocalStorage.split(',');
+        const booksInProgressMaskSet = inProgressLocalStorage.split(',');
+    
+        let booksToRead = [];
+        let booksInProgress = [];
+        let booksDone = [];
+        for (let book of books) {
+            if (booksInProgressMaskSet.includes(book.id)) {
+                booksInProgress.push(book);
+            } else if (booksDoneMaskSet.includes(book.id)) {
+                booksDone.push(book)
+            } else {
+                booksToRead.push(book)
+            }
+        }
+        
+        yield put(fetchBooksSuccess({ booksToRead, booksInProgress, booksDone }));
     } catch (e) {
         yield put(fetchBooksFailure());
     }

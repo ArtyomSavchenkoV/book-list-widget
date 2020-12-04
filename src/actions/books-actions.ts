@@ -1,4 +1,5 @@
-import { TAction } from '../reducers';
+import { TAction } from '../types/actions-types';
+import { TBook } from '../types/book-type';
 
 type TFetchBooksRequested = {
     (): TAction
@@ -9,37 +10,15 @@ const fetchBooksRequested: TFetchBooksRequested = () => {
     }
 }
 
+
 type TFetchBooksSuccess = {
     (arg0: {
-        books: {
-            id: string,
-            author: string,
-            title: string,
-            description: string,
-            tags: string[]
-        }[],
-        booksInProgressMask: string,
-        booksDoneMask: string
+        booksToRead: TBook[],
+        booksInProgress: TBook[],
+        booksDone: TBook[]
     }): TAction
 }
-const fetchBooksSuccess: TFetchBooksSuccess = ({ books, booksInProgressMask, booksDoneMask }) => {
-    // create books arrays by saved status 
-    const booksInProgressMaskSet = booksInProgressMask.split(',');
-    const booksDoneMaskSet = booksDoneMask.split(',');
-    
-    let booksToRead = [];
-    let booksInProgress = [];
-    let booksDone = [];
-    for (let book of books) {
-        if (booksInProgressMaskSet.includes(book.id)) {
-            booksInProgress.push(book);
-        } else if (booksDoneMaskSet.includes(book.id)) {
-            booksDone.push(book)
-        } else {
-            booksToRead.push(book)
-        }
-    }
-    
+const fetchBooksSuccess: TFetchBooksSuccess = ({ booksToRead, booksInProgress, booksDone }) => {    
     return {
         type: 'FETCH_BOOKS_SUCCESS',
         payload: {
@@ -62,24 +41,11 @@ const fetchBooksFailure: TFetchBooksFailure = () => {
 
 
 interface IFetchBooksRequest {
-    (arg0: {
-        booksInProgressMask: string,
-        booksDoneMask: string
-    }): {
-        type: 'FETCH_BOOKS_REQUEST',
-        payload: {
-            booksInProgressMask: string,
-            booksDoneMask: string
-        }
-    }
+    (): TAction
 }
-const fetchBooksRequest: IFetchBooksRequest = ({ booksInProgressMask, booksDoneMask }) => {
+const fetchBooksRequest: IFetchBooksRequest = () => {
     return {
-        type: 'FETCH_BOOKS_REQUEST',
-        payload: {
-            booksInProgressMask,
-            booksDoneMask
-        }
+        type: 'FETCH_BOOKS_REQUEST'
     }
 }
 

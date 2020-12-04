@@ -24,12 +24,10 @@ const Controller: React.FC<TProps & TWithLocalization & IConnect<typeof storeEnc
     fetchBooksRequest,
     localize
 }) => {
-    const doneLocalStorage = window.localStorage.getItem('done') || '';
-    const inProgressLocalStorage = window.localStorage.getItem('inProgress') || '';
     let content: JSX.Element | JSX.Element[] = <NoticePanel><Spinner /></NoticePanel>;
     switch (booksStatus) {
         case 'EMPTY': {
-            fetchBooksRequest({booksInProgressMask: inProgressLocalStorage, booksDoneMask: doneLocalStorage});
+            fetchBooksRequest();
             break;
         }
         case 'READY': {
