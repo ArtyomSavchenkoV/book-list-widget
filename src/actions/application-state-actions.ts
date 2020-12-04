@@ -1,5 +1,4 @@
 import { TAction } from '../types/actions-types';
-import { IApiService } from '../services/api-service';
 
 
 interface IFetchDictionaryRequested {
@@ -34,17 +33,12 @@ const fetchDictionaryFailure: IFetchDictionaryFailure = () => {
 
 
 interface IFetchDictionaryRequest {
-    (ApiService: IApiService): (arg0: any) => void
+    (): TAction
 }
-const fetchDictionaryRequest: IFetchDictionaryRequest = (ApiService) => (dispatch) => {
-    dispatch(fetchDictionaryRequested());
-    ApiService.getDictionaryRequest().then((request) => {
-        dispatch(fetchDictionarySuccess(request));
-    })
-        .catch(() => {
-            dispatch(fetchDictionaryFailure());
-        })
-
+const fetchDictionaryRequest: IFetchDictionaryRequest = () => {
+    return {
+        type: 'FETCH_DICTIONARY_REQUEST'
+    }
 }
 
 
@@ -75,6 +69,9 @@ const setPageAndTags: ISetPageAndTags = (payload) => {
 
 export {
     fetchDictionaryRequest,
+    fetchDictionaryRequested,
+    fetchDictionarySuccess,
+    fetchDictionaryFailure,
     setPage,
     setPageAndTags
 }

@@ -4,15 +4,21 @@ import { takeEvery, put, call } from 'redux-saga/effects';
 import {
     fetchBooksRequested,
     fetchBooksSuccess,
-    fetchBooksFailure
-} from '../actions/books-actions';
+    fetchBooksFailure,
+    fetchDictionaryRequested,
+    fetchDictionarySuccess,
+    fetchDictionaryFailure,
+} from '../actions';
 
 export type TSagasCommands = {
     type: 'FETCH_BOOKS_REQUEST'
+} | {
+    type: 'FETCH_DICTIONARY_REQUEST'
 };
 
 const sagaCreator = ({ ApiService }: { ApiService: IApiService }) => function* sagaWatcher() {
-    yield takeEvery('FETCH_BOOKS_REQUEST', fetchBooksRequestSagaWorkerCreator({ ApiService }))
+    yield takeEvery('FETCH_BOOKS_REQUEST', fetchBooksRequestSagaWorkerCreator({ ApiService }));
+    yield takeEvery('FETCH_DICTIONARY_REQUEST', fetchDictionaryRequestSagaWorkerCreator({ ApiService }));
 }
 
 const fetchBooksRequestSagaWorkerCreator = ({ ApiService }: { ApiService: IApiService }) => function* fetchBooksRequestSagaWorker(action: {
@@ -45,5 +51,19 @@ const fetchBooksRequestSagaWorkerCreator = ({ ApiService }: { ApiService: IApiSe
         yield put(fetchBooksFailure());
     }
 }
+
+
+const fetchDictionaryRequestSagaWorkerCreator = ({ ApiService }: { ApiService: IApiService }) => function* fetchDictionaryRequestSagaWorker(action: {
+    type: 'FETCH_DICTIONARY_REQUEST'
+}) {
+    yield put(fetchDictionaryRequested());
+    try {
+        const response = yield call(() => ApiService.getDictionaryRequest());
+        yield put(fetchDictionarySuccess(response));
+    } catch (e) {
+        yield put(fetchDictionaryFailure());
+    }
+}
+
 
 export default sagaCreator;

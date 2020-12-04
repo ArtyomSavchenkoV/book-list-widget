@@ -1,5 +1,8 @@
 import {
     fetchDictionaryRequest,
+    fetchDictionaryRequested,
+    fetchDictionarySuccess,
+    fetchDictionaryFailure,
     setPage,
     setPageAndTags
 } from './application-state-actions';
@@ -15,6 +18,9 @@ import {
 
 export {
     fetchDictionaryRequest,
+    fetchDictionaryRequested,
+    fetchDictionarySuccess,
+    fetchDictionaryFailure,
     setPage,
     setPageAndTags,
 

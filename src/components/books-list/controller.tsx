@@ -59,8 +59,7 @@ const Controller: React.FC<TProps & TWithLocalization & IConnect<typeof storeEnc
             break;
         }
         default: { }
-    }
-    
+    };    
 
     return (
         <Layout>
