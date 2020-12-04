@@ -1,7 +1,11 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 
 import reducer from './reducers';
+import sagaCreator from './sagas';
+
+
 /**
  * Use the string as an action, and dispatch it.
  *
@@ -29,12 +33,18 @@ const logMiddleware = (Store) => (dispatch) => (action) => {
 /**
  * Create store with the action string converter, thunk and logger middleware.
  */
-const store = createStore(
-    reducer,
-    applyMiddleware(
-        thunkMiddleware,
-        stringMiddleware,
-        logMiddleware
-    ));
+const storeCreator = ({ ApiService }) => {
+    const saga = createSagaMiddleware();
+    const store = createStore(
+        reducer,
+        applyMiddleware(
+            thunkMiddleware,
+            stringMiddleware,
+            logMiddleware,
+            saga
+        ));
+    saga.run(sagaCreator({ ApiService }));
+    return store;
+} 
 
-export default store;
+export default storeCreator;

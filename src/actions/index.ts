@@ -5,6 +5,9 @@ import {
 } from './application-state-actions';
 import {
     fetchBooksRequest,
+    fetchBooksRequested,
+    fetchBooksSuccess,
+    fetchBooksFailure,
     changeBookStatus,
     setFilterTags,
     switchFilterTag
@@ -16,6 +19,9 @@ export {
     setPageAndTags,
 
     fetchBooksRequest,
+    fetchBooksRequested,
+    fetchBooksSuccess,
+    fetchBooksFailure,
     changeBookStatus,
     setFilterTags,
     switchFilterTag

@@ -1,6 +1,4 @@
 import { TAction } from '../reducers';
-import { IApiService } from '../services/api-service';
-
 
 type TFetchBooksRequested = {
     (): TAction
@@ -10,7 +8,6 @@ const fetchBooksRequested: TFetchBooksRequested = () => {
         type: 'FETCH_BOOKS_REQUESTED'
     }
 }
-
 
 type TFetchBooksSuccess = {
     (arg0: {
@@ -66,19 +63,24 @@ const fetchBooksFailure: TFetchBooksFailure = () => {
 
 interface IFetchBooksRequest {
     (arg0: {
-        ApiService: IApiService,
         booksInProgressMask: string,
         booksDoneMask: string
-    }): (arg0: any) => void
+    }): {
+        type: 'FETCH_BOOKS_REQUEST',
+        payload: {
+            booksInProgressMask: string,
+            booksDoneMask: string
+        }
+    }
 }
-const fetchBooksRequest: IFetchBooksRequest = ({ ApiService, booksInProgressMask, booksDoneMask }) => (dispatch) => {
-    dispatch(fetchBooksRequested());
-    ApiService.getBooksRequest().then((request) => {
-        dispatch(fetchBooksSuccess({ books: request, booksInProgressMask, booksDoneMask }));
-    })
-        .catch(() => {
-            dispatch(fetchBooksFailure());
-        })
+const fetchBooksRequest: IFetchBooksRequest = ({ booksInProgressMask, booksDoneMask }) => {
+    return {
+        type: 'FETCH_BOOKS_REQUEST',
+        payload: {
+            booksInProgressMask,
+            booksDoneMask
+        }
+    }
 }
 
 
@@ -121,6 +123,9 @@ const switchFilterTag: ISwitchFilterTag = (tag) => {
 
 export {
     fetchBooksRequest,
+    fetchBooksRequested,
+    fetchBooksSuccess,
+    fetchBooksFailure,
     changeBookStatus,
     setFilterTags,
     switchFilterTag

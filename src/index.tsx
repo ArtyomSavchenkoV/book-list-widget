@@ -7,7 +7,7 @@ import { ApiServiceProvider } from "./components/contexts/api-service-context";
 import ApiServiceClass from './services/api-service';
 
 //  Import store
-import store from './store';
+import storeCreator from './store';
 
 //  Import components
 import App from './components/app';
@@ -19,9 +19,9 @@ const ApiService = new ApiServiceClass();
 *   Render
 */
 ReactDOM.render((
-    <Provider store={store}>
+    <Provider store={storeCreator({ ApiService })}>
         <ErrorBoundary>
-            <ApiServiceProvider value={ApiService}>
+            <ApiServiceProvider value={ ApiService }>
                 <App />
             </ApiServiceProvider>
         </ErrorBoundary>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import withErrorBoundary from '../hoc/with-error-boundary';
-import withApiService, { TWithApiService } from '../hoc/with-api-service';
 import withLocalization, { TWithLocalization } from '../hoc/with-localization';
 import compose from '../../utils/compose';
 
@@ -17,13 +16,12 @@ import Spinner from '../common/spinner';
 
 type TProps = {
 }
-const Controller: React.FC<TProps & TWithApiService & TWithLocalization & IConnect<typeof storeEnchancer>> = ({
+const Controller: React.FC<TProps & TWithLocalization & IConnect<typeof storeEnchancer>> = ({
     currentPage,
     booksList,
     selectedFilterTags,
     booksStatus,
     fetchBooksRequest,
-    ApiService,
     localize
 }) => {
     const doneLocalStorage = window.localStorage.getItem('done') || '';
@@ -31,7 +29,7 @@ const Controller: React.FC<TProps & TWithApiService & TWithLocalization & IConne
     let content: JSX.Element | JSX.Element[] = <NoticePanel><Spinner /></NoticePanel>;
     switch (booksStatus) {
         case 'EMPTY': {
-            fetchBooksRequest({ApiService, booksInProgressMask: inProgressLocalStorage, booksDoneMask: doneLocalStorage});
+            fetchBooksRequest({booksInProgressMask: inProgressLocalStorage, booksDoneMask: doneLocalStorage});
             break;
         }
         case 'READY': {
@@ -107,6 +105,5 @@ const storeEnchancer = connect(mapStoreToProps, mapDispatchToProps);
 export default compose(
     withErrorBoundary,
     withLocalization,
-    withApiService,
     storeEnchancer
 )(Controller) as React.FC<TProps>;
