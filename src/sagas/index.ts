@@ -19,12 +19,15 @@ const sagaCreator = ({ ApiService }: { ApiService: IApiService }) => function* s
     yield takeEvery('FETCH_BOOKS_REQUEST', fetchBooksRequestSagaWorkerCreator({ ApiService }))
 }
 
-const fetchBooksRequestSagaWorkerCreator = ({ ApiService }: { ApiService: IApiService }) => function* fetchBooksRequestSagaWorker(action: TSagasCommands) {
+const fetchBooksRequestSagaWorkerCreator = ({ ApiService }: { ApiService: IApiService }) => function* fetchBooksRequestSagaWorker(action: {
+    type: 'FETCH_BOOKS_REQUEST',
+    payload: {
+        booksInProgressMask: string,
+        booksDoneMask: string
+    }
+}) {
     yield put(fetchBooksRequested());
     try {
-        /*if (action.type !== 'FETCH_BOOKS_REQUEST') {
-            throw new Error('Saga watcher cals wrong a saga worker.');
-        }*/
         const response = yield call(() => ApiService.getBooksRequest());
         yield put(fetchBooksSuccess({ books: response, booksInProgressMask: action.payload.booksInProgressMask, booksDoneMask: action.payload.booksDoneMask }));
     } catch (e) {
